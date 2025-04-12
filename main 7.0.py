@@ -3,7 +3,7 @@ import json
 from urllib.parse import quote
 from datetime import datetime, timedelta
 import streamlit as st
-import logger 
+import logging
 
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
