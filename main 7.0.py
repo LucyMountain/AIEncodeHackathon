@@ -3,6 +3,10 @@ import json
 from urllib.parse import quote
 from datetime import datetime, timedelta
 import streamlit as st
+import logger 
+
+logging.basicConfig(level=logging.ERROR)
+logger = logging.getLogger(__name__)
 
 CITY_LIVING_COSTS = {
     "London": 2100,
@@ -20,7 +24,8 @@ def get_all_protocols():
         response.raise_for_status()
         return response.json()
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching protocols: {e}")
+        st.error(f"Error fetching protocols: {e}") # was outputting error message to terminal and not streamlit
+        logger.error(f"Protocol fetch failed: {e}", exc_info = True) #loging the error - easier to handle errors/debug
         return []
 
 def get_current_tvl(protocol_slug):
@@ -36,7 +41,8 @@ def get_current_tvl(protocol_slug):
         else:
             return 0
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching current TVL: {e}")
+        st.error(f"Error fetching current TVL: {e}")# was outputting error message to terminal and not streamlit
+        logger.error(f"Current TVL fetch error: {e}", exc_info = True) #loging the error - easier to handle errors/debug
         return 0
 
 
@@ -59,7 +65,8 @@ def get_historical_tvl(protocol_slug, days_ago=30):
         )
         return closest_entry.get('totalLiquidityUSD', 0)
     except requests.exceptions.RequestException as e:
-        print(f"Error fetching historical TVL: {e}")
+        st.error(f"Error fetching historical TVL: {e}")# was outputting error message to terminal and not streamlit
+        logger.error(f"Historical TVL fetch error: {e}", exc_info = True)#loging the error - easier to handle errors/debug
         return 0
 
 def calculate_roi(current_tvl, historical_tvl):
