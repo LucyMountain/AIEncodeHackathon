@@ -6,6 +6,8 @@ Group Project – Koyna Chakravorty, Lucy Mountain, Hamim Al Hussain, Yin Mui Ta
 
 Project Title: DeFi Investment Recommendation Assistant 
 
+Demo Video Link: https://www.dropbox.com/scl/fi/0gd9miuh7qla714wly1se/videodemo.mkv?rlkey=98jck1yxruhmj95k2th5gfztv&st=s3k6cnzg&dl=0
+
  
 
 ​​ 
