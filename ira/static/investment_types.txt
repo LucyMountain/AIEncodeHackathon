@@ -1,0 +1,34 @@
+Lending
+You lend your crypto to others, usually through a platform in exchange for earning interest (which is a return amount that you have to pay back).
+Works similar to bank saving account but with higher potential return, but also a higher risk.
+Borrowers often put up collateral ( a valuable asset as a pledge as a security for a loan) to reduce default risk.
+
+Staking
+You lock up your crypto, usually a proof-of-stake token like ETH or SOL, to help secure a blockchain network.
+In return you earn rewards, like interest, over time.
+Similar to earning dividends(Profit pay-outs to shareholders) for helping run the system.
+
+Yield farming
+You move your crypto between different DeFi platforms to chase  the highest returns.
+Often involves  staking or lending tokens to earn interest and extra token rewards.
+Higher return	 usually  come with higher risk and complexity.
+
+DEX LP
+You provide two tokens to a decentralised exchange(like Uniswap:place to trade crypto without a middleman) to help users trade.
+You earn a share of the trading fees, but risk losses if token prices shift too much (impermanent loss).
+It's like being a mini market-marker on  a crypto exchange.
+
+Stable-coin Yield
+You can earn interest by depositing stable-coins(cryptos tied to the  dollar, like USDC or DAI).
+This strategy is often low-risk because stable-coins don't fluctuate like regular crypto.
+Returns can come from lending, staking, or providing liquidity with stable-coins.
+
+Vault strategy
+Smart contract that automatically invests crypto using a specific strategy (like lending or yield farming).
+It's like putting your money in a robo-advisor for DeFi.
+Designed to maximise  yield while automating complex tasks for the user.
+
+Auto Yield Aggregator
+These platforms automatically find  and switch to the best DeFi returns for your crypto.
+The "farm the farmers" by pooling users funds and rotating them to the most profitable strategies.
+Great for hands-off users who want optimised passive income.

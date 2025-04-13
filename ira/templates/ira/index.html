@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'maths.ico' %}"/>
+<!--        <link rel="stylesheet" href="{% static 'bootstrap-5.0.0-beta1-dist/css/bootstrap.css' %}">-->
+<!--        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+        <title>Investment Recommendation Assistant</title>
+    </head>
+    <body>
+        <div class="cool-line" style="margin-top:5vh;"></div>
+        <h1 class="h1">DeFi Investment Recommendation Assistant</h1>
+        <button class="form_button" onclick="showForm()" id="form_button">
+          Get Started
+          <div class="icon">
+            <svg
+              height="24"
+              width="24"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+        </button>
+        <form method="POST" hx-post="{% url 'ira:index' %}" hx-target="#result" class="form__group" id="form" class="form-div" style="display: none;">
+            {% csrf_token %}
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="City" name="city" id='city' required />
+                <label for="city" class="form__label">City</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Monthly salary (GBP)" name="salary" id='salary' min="0" required />
+                <label for="salary" class="form__label">Monthly Salary</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Investment Duration" name="duration" id='duration' min="1" step="1" required />
+                <label for="duration" class="form__label">Investment Duration</label>
+            </div>
+            <div class="form__group field">
+                <div class="form__field">
+                    <select name="Investment Risk" id="investment_risk">
+                        <option value="low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <label for="investment_risk" class="form__label">Investment Risk</label>
+            </div>
+            <div class="form__group field">
+                <div class="form__field">
+                    <input type="checkbox" id="op1" name="op1" value="Lending Platforms">
+                    <label for="op1" style="margin-right: 10px;">Lending Platforms</label>
+                    <input type="checkbox" id="op2" name="op2" value="DEXs">
+                    <label for="op1" style="margin-right: 10px;">DEXs</label>
+                    <input type="checkbox" id="op3" name="op3" value="Yield Farming">
+                    <label for="op1" style="margin-right: 10px;">Yield Farming</label>
+                    <input type="checkbox" id="op4" name="op4" value="Stablecoins">
+                    <label for="op1" style="margin-right: 10px;">Stablecoins</label>
+                    <input type="checkbox" id="op5" name="op5" value="Staking">
+                    <label for="op1" style="margin-right: 30px;">Staking</label>
+                    <input type="checkbox" id="op6" name="op6" value="Vault Strategy">
+                    <label for="op1" style="margin-right: 10px;">Vault Strategy</label>
+                    <input type="checkbox" id="op7" name="op7" value="Auto Yield Aggregator">
+                    <label for="op1" style="margin-right: 10px;">Auto Yield Aggregator</label>
+                </div>
+                <label class="form__label">Investment Types</label>
+            </div>
+            <div class="submit-button-box">
+                <button type="submit" class="submit-button">
+                  Submit
+                  <div class="icon">
+                    <svg
+                      height="24"
+                      width="24"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+            </div>
+            <div id="result"></div>
+        </form>
+        <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+        <script type="text/javascript">
+            function showForm() {
+                document.getElementById('form').style.display = 'block';
+                document.getElementById('form_button').style.display = 'none';
+            }
+        </script>
+        <div class="cool-line" style="margin-bottom:10vh"></div>
+        <div id="info" class="info">
+            <div id="info-inner" class="info-inner">
+                <h2 class="h2">Investment Types Explained:</h2>
+                {% for item in content %}
+                <button type="button" class="collapsible">{{ item.title }}</button>
+                    <div class="content">
+                        <ul>
+                            {% for line in item.description %}
+                            <li>{{ line }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            }
+          });
+        }
+    </script>
+    </body>
+</html>
